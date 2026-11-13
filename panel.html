@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Silk Road — Panel</title>
+<style>
+:root{--bg0:#08080C;--bg1:#0D0D14;--bg2:#13131C;--bg3:#1A1A26;--line:rgba(212,175,55,.14);--line-soft:rgba(255,255,255,.06);--gold200:#F9ECBE;--gold300:#F3DFA0;--gold400:#E3C566;--gold500:#D4AF37;--ivory:#F4EFE4;--muted:#9A927E;--faint:#6B6558;--active:#3DD68C;--expired:#F26D6D;--susp:#F0B35C;--grad-btn:linear-gradient(135deg,#E8CD7A 0%,#C9A227 100%);--grad-text:linear-gradient(120deg,#F9ECBE 0%,#E3C566 35%,#D4AF37 55%,#8C6D1F 100%);--shadow-card:0 0 0 1px rgba(212,175,55,.10),0 8px 32px rgba(0,0,0,.5)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg0);color:var(--ivory);font-family:system-ui,'Segoe UI',Tahoma;min-height:100vh}
+#app{display:flex;min-height:100vh}
+.sidebar{width:230px;background:var(--bg1);border-left:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.brand{font-size:22px;font-weight:800;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:14px;letter-spacing:.5px}
+.nav{padding:10px 12px;border-radius:8px;color:var(--muted);font-size:14px}
+.nav.on{background:var(--bg2);color:var(--gold300);border:1px solid var(--line)}
+.nav.on::before{content:"◆ ";color:var(--gold500)}
+.status{display:flex;align-items:center;gap:8px;margin-top:auto;font-size:12px;color:var(--muted);border-top:1px solid var(--line-soft);padding-top:12px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--active);box-shadow:0 0 8px var(--active)}
+.main{flex:1;padding:26px;max-width:900px}
+.card{background:var(--bg1);border-radius:12px;padding:20px;margin-bottom:18px;box-shadow:var(--shadow-card);background-image:radial-gradient(120% 60% at 50% 0%,rgba(212,175,55,.07) 0%,transparent 60%)}
+h2{font-size:16px;color:var(--gold300);margin-bottom:14px}
+input,select{background:var(--bg2);border:1px solid var(--line-soft);color:var(--ivory);padding:10px 12px;border-radius:8px;font-size:14px}
+input:focus,select:focus{outline:none;border-color:var(--gold500)}
+.btn{background:var(--grad-btn);color:#1a1503;border:none;padding:10px 20px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer}
+.row{display:flex;gap:8px}
+.row input{flex:1}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{color:var(--faint);text-align:right;padding:8px 10px;border-bottom:1px solid var(--line-soft);font-weight:600}
+td{padding:9px 10px;border-bottom:1px solid var(--line-soft);color:var(--ivory)}
+tr:hover td{background:rgba(212,175,55,.04)}
+.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.b-active{color:var(--active);background:rgba(61,214,140,.10)}
+.b-expired{color:var(--expired);background:rgba(242,109,109,.10)}
+.del{color:var(--expired);cursor:pointer;font-size:15px;padding:2px 8px}
+.del:hover{background:rgba(242,109,109,.12);border-radius:6px}
+#msg{min-height:20px;font-size:13px;color:var(--gold300);margin-top:10px}
+#login{max-width:380px;margin:12vh auto}
+#login h1{font-size:26px;font-weight:800;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;margin-bottom:6px}
+#login p{color:var(--faint);text-align:center;font-size:13px;margin-bottom:20px}
+#login input{width:100%;margin-bottom:10px}
+#login .btn{width:100%}
+@media(max-width:640px){.sidebar{display:none}.main{padding:16px}}
+</style></head><body>
+<div id="login" class="card" style="display:none">
+<h1>Silk Road</h1><p>لوحة تحكم المفاتيح — سجل الدخول</p>
+<input id="tok" type="password" placeholder="GitHub Token" dir="ltr">
+<button class="btn" onclick="save()">دخول</button>
+<div id="lmsg" style="color:var(--expired);font-size:12px;text-align:center;margin-top:8px"></div>
+</div>
+<div id="app" style="display:none">
+<div class="sidebar">
+<div class="brand">Silk Road</div>
+<div class="nav on">المفاتيح</div>
+<div class="nav">الروابط</div>
+<div class="nav">الإحصائيات</div>
+<div class="status"><span class="dot"></span><span>السيرفر يعمل</span></div>
+</div>
+<div class="main">
+<div class="card">
+<h2>إضافة مفتاح جديد</h2>
+<div class="row">
+<input id="dev" placeholder="Device ID" dir="ltr" style="flex:2">
+<select id="days"><option value="1">يوم 1</option><option value="7">7 أيام</option><option value="15">15 يوم</option><option value="30" selected>30 يوم</option></select>
+<button class="btn" onclick="add()">إضافة</button>
+</div>
+<div id="msg"></div>
+</div>
+<div class="card">
+<h2>المفاتيح <span id="count" style="color:var(--gold500)"></span></h2>
+<table><thead><tr><th>Device ID</th><th>الانتهاء</th><th>الأيام</th><th>الحالة</th><th></th></tr></thead><tbody id="list"></tbody></table>
+</div>
+</div></div>
+<script>
+const REPO="mbl68/VBAAAAuwh",FILE="k1532c945.txt";
+let T=localStorage.tok,cur="",sha="";
+function show(id){document.getElementById(id).style.display="block"}
+async function api(p,o){o=o||{};o.headers=Object.assign({Authorization:"Bearer "+T,Accept:"application/vnd.github+json"},o.headers||{});const r=await fetch("https://api.github.com/repos/"+REPO+p,o);if(!r.ok)throw new Error(r.status);return r.json()}
+async function save(){T=document.getElementById("tok").value.trim();try{await api("/contents/"+FILE);localStorage.tok=T;boot()}catch(e){document.getElementById("lmsg").textContent="التوكن غير صحيح"}}
+async function boot(){document.getElementById("login").style.display="none";show("app");const f=await api("/contents/"+FILE);sha=f.sha;const t=await (await fetch("https://raw.githubusercontent.com/"+REPO+"/main/"+FILE)).text();render(t)}
+function purge(t){const today=new Date().toISOString().slice(0,10);const lines=t.split("\n").filter(Boolean);const keep=lines.filter(l=>(l.split(":")[1]||"").replace(/\r/g,"")>=today);return{text:keep.join("\n")+"\n",removed:lines.length-keep.length}}
+async function commit(content,msg){const r=await api("/contents/"+FILE,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg,content:btoa(unescape(encodeURIComponent(content))),sha})});sha=r.content.sha}
+async function render(t){cur=t;const p=purge(t);if(p.removed>0){try{await commit(p.text,"purge "+p.removed);cur=p.text;document.getElementById("msg").textContent="تم حذف "+p.removed+" مفتاح منتهي تلقائياً"}catch(e){}}
+const today=new Date().toISOString().slice(0,10);const rows=cur.trim().split("\n").filter(Boolean).map(l=>{const a=l.split(":");const id=a[0],date=(a[1]||"").replace(/\r/g,""),days=a[2]||"";const act=date>=today;return "<tr><td dir=ltr>"+id+"</td><td dir=ltr>"+date+"</td><td>"+days+"</td><td><span class='badge " +(act?"b-active'>Active":"b-expired'>Expired")+"</span></td><td><span class='del' onclick='del(\""+id+"\")'>✕</span></td></tr>"}).join("");
+document.getElementById("list").innerHTML=rows;document.getElementById("count").textContent="("+cur.trim().split("\n").filter(Boolean).length+")"}
+async function add(){const id=document.getElementById("dev").value.trim();if(!id)return;const d=parseInt(document.getElementById("days").value);const exp=new Date(Date.now()+d*864e5).toISOString().slice(0,10);const nl=cur.endsWith("\n")?"":"\n";try{await commit(cur+nl+id+":"+exp+":"+d,"add "+id);document.getElementById("dev").value="";document.getElementById("msg").textContent="تمت الإضافة";render(cur+nl+id+":"+exp+":"+d)}catch(e){document.getElementById("msg").textContent="خطأ"}}
+async function del(id){try{await commit(cur.split("\n").filter(l=>l&&!l.startsWith(id+":")).join("\n")+"\n","del "+id);render(cur.split("\n").filter(l=>l&&!l.startsWith(id+":")).join("\n")+"\n")}catch(e){}}
+if(T)boot();else show("login");
+</script></body></html>
