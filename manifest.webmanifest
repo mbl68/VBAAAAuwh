@@ -1,0 +1,17 @@
+{
+  "name": "Silk Road",
+  "short_name": "Silk Road",
+  "description": "لوحة تحكم المالك",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#08080C",
+  "theme_color": "#08080C",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
