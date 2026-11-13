@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Open lid (hinged at back rim, leaning back) -->
+  <g stroke="#D4AF37" stroke-width="2">
+    <path d="M 120 105 L 225 105 L 234 56 L 129 56 Z"/>
+    <path d="M 126 96 L 222 96 L 228 65 L 134 65 Z" stroke="#7A5E1E" stroke-width="1.4"/>
+  </g>
+  <!-- Chest rim / empty interior -->
+  <path d="M 90 125 L 195 125 L 225 105 L 120 105 Z" stroke="#D4AF37" stroke-width="2"/>
+  <path d="M 99 121 L 191 121 L 214 107 L 126 107 Z" stroke="#7A5E1E" stroke-width="1.5"/>
+  <!-- Body: front + right side (3/4 view) -->
+  <g stroke="#D4AF37" stroke-width="2">
+    <path d="M 90 125 L 195 125 L 195 186 L 90 186 Z"/>
+    <path d="M 195 125 L 225 105 L 225 166 L 195 186 Z"/>
+  </g>
+  <!-- Banding + corner brackets -->
+  <g stroke="#7A5E1E" stroke-width="1.4">
+    <path d="M 90 140 L 195 140 M 90 170 L 195 170"/>
+    <path d="M 195 140 L 225 120 M 195 170 L 225 150"/>
+    <path d="M 96 131 L 104 131 M 96 131 L 96 139 M 189 131 L 181 131 M 189 131 L 189 139"/>
+    <path d="M 96 180 L 104 180 M 96 180 L 96 172 M 189 180 L 181 180 M 189 180 L 189 172"/>
+    <path d="M 219 112 L 219 120 M 219 112 L 212 117 M 219 160 L 219 152 M 219 160 L 212 165"/>
+  </g>
+  <!-- Keyhole escutcheon on front -->
+  <g stroke="#D4AF37" stroke-width="1.6">
+    <path d="M 131 147 L 154 147 L 154 164 L 131 164 Z"/>
+    <circle cx="142.5" cy="152.5" r="2.6"/>
+    <path d="M 142.5 155 L 142.5 160"/>
+  </g>
+  <!-- Three faint key outlines floating upward (dotted ghosts) -->
+  <g stroke="#D4AF37" fill="none">
+    <g stroke-width="1.8" stroke-dasharray="2.5 3" opacity="0.8">
+      <circle cx="150" cy="72" r="5"/>
+      <path d="M 150 77 L 150 92 M 150 87 L 155 87 M 150 92 L 156 92"/>
+    </g>
+    <g stroke-width="1.5" stroke-dasharray="2 2.6" opacity="0.5">
+      <circle cx="176" cy="50" r="4"/>
+      <path d="M 176 54 L 176 66 M 176 62 L 180 62 M 176 66 L 181 66"/>
+    </g>
+    <g stroke-width="1.3" stroke-dasharray="1.6 2.4" opacity="0.3">
+      <circle cx="138" cy="32" r="3.2"/>
+      <path d="M 138 35.2 L 138 45 M 138 41.5 L 141.4 41.5 M 138 45 L 141.8 45"/>
+    </g>
+  </g>
+  <!-- Sparkles -->
+  <g stroke="#F3DFA0" stroke-width="1.4">
+    <path d="M 108 62 L 108 70 M 104 66 L 112 66"/>
+    <path d="M 208 34 L 208 42 M 204 38 L 212 38" opacity="0.8"/>
+    <path d="M 196 82 L 196 87 M 193.5 84.5 L 198.5 84.5" opacity="0.6"/>
+    <path d="M 88 96 L 88 101 M 85.5 98.5 L 90.5 98.5" opacity="0.5"/>
+  </g>
+</svg>
