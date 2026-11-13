@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jaziel Keys Panel</title>
+<style>
+body{background:#0b0f14;color:#e6edf3;font-family:system-ui;margin:0;padding:16px}
+h1{font-size:18px;color:#58d6a6}input,button,textarea{font-size:15px;padding:9px;border-radius:8px;border:1px solid #30363d;background:#161b22;color:#e6edf3;width:100%;box-sizing:border-box;margin:4px 0}
+button{background:#238636;border:none;font-weight:600}
+.row{display:flex;gap:6px}.row input{flex:1}
+.key{display:flex;justify-content:space-between;padding:7px 9px;background:#161b22;border-radius:7px;margin:4px 0;font-size:13px}
+.del{color:#f85149;cursor:pointer;padding:0 8px}
+#msg{font-size:13px;color:#58d6a6;min-height:18px}
+</style></head><body>
+<h1>JAZIEL SCRIPTZ — Panel de Claves</h1>
+<div id="auth">
+<input id="tok" placeholder="GitHub Token (una vez)" type="password">
+<input id="repo" placeholder="usuario/nombre-repo">
+<button onclick="save()">Guardar</button>
+</div>
+<div id="msg"></div>
+<div id="panel" style="display:none">
+<div class="row"><input id="dev" placeholder="Device ID"><select id="days"><option value="1">1</option><option value="7">7</option><option value="15">15</option><option value="30" selected>30</option></select></div>
+<button onclick="add()">Añadir clave</button>
+<div id="list"></div>
+</div>
+<script>
+const RAW="https://raw.githubusercontent.com/";const FILE="k1532c945.txt";const REPO="mbl68/VBAAAAuwh";
+let T=localStorage.tok,R=localStorage.repo;
+function save(){T=document.getElementById("tok").value;R=document.getElementById("repo").value;localStorage.tok=T;localStorage.repo=R;load()}
+async function api(path,opt){opt=opt||{};opt.headers=Object.assign({Authorization:"token "+T,Accept:"application/vnd.github+json"},opt.headers||{});const r=await fetch("https://api.github.com/repos/"+R+path,opt);if(!r.ok)throw new Error(r.status);return r.json()}
+async function load(){document.getElementById("auth").style.display="none";document.getElementById("panel").style.display="block";const f=await api("/contents/"+FILE);window.sha=f.sha;const t=await (await fetch(RAW+REPO+"/main/"+FILE)).text();render(t)}
+function render(t){window.cur=t;const d=document.getElementById("list");d.innerHTML="";t.trim().split("\n").filter(Boolean).forEach(l=>{const[id,date,days]=l.split(":");const s=document.createElement("div");s.className="key";s.innerHTML=`<span>${id} — ${date} (${days}d)</span><span class="del" onclick="del('${id}')">✕</span>`;d.appendChild(s)})}
+async function commit(content,msg){const r=await api("/contents/"+FILE,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg,content:btoa(unescape(encodeURIComponent(content))),sha:window.sha})});window.sha=r.content.sha}
+async function add(){const id=document.getElementById("dev").value.trim();if(!id)return;const d=parseInt(document.getElementById("days").value);const exp=new Date(Date.now()+d*864e5).toISOString().slice(0,10);const nl=cur.endsWith("\n")?"":"\n";await commit(cur+nl+id+":"+exp+":"+d,"add "+id);document.getElementById("msg").textContent="✔ Añadido";document.getElementById("dev").value="";load()}
+async function del(id){await commit(cur.split("\n").filter(l=>l&&!l.startsWith(id+":")).join("\n")+"\n","del "+id);load()}
+if(T&&R)load();
+</script></body></html>
