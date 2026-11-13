@@ -1,0 +1,45 @@
+<!doctype html>
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- الموقع داكن أصلاً — يمنع أي WebView/متصفح من إعادة تلوينه آلياً (Force Dark) -->
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/mbl68/VBAAAAuwh/main/favicon.svg" />
+    <meta name="description" content="سيرفر تراخيص خاص — لوحة تحكم المالك" />
+    <!-- PWA: افتح اللوحة من أيقونة الشاشة الرئيسية = بدون شريط رابط إطلاقاً -->
+    <link rel="manifest" href="https://raw.githubusercontent.com/mbl68/VBAAAAuwh/main/manifest.webmanifest" />
+    <meta name="theme-color" content="#08080C" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Silk Road" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Silk Road</title>
+    <script>
+      // إخفاء شعار المنصة: حذف أي عنصر kimi-action-bar فور ظهوره
+      (function () {
+        function removeBadge() {
+          document
+            .querySelectorAll('.kimi-action-bar, [class*="kimi-action-bar"], [class*="kimi-brand"]')
+            .forEach(function (el) { el.remove(); });
+        }
+        removeBadge();
+        new MutationObserver(removeBadge).observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      })();
+    </script>
+    <script src="https://raw.githubusercontent.com/mbl68/VBAAAAuwh/main/gh-shim.js"></script><script type="module" crossorigin src="https://raw.githubusercontent.com/mbl68/VBAAAAuwh/main/assets/index-CNI7ghoc.js"></script>
+    <link rel="stylesheet" crossorigin href="https://raw.githubusercontent.com/mbl68/VBAAAAuwh/main/assets/index-BBeJ_zsp.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
