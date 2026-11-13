@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <!-- Octagonal Islamic seal frame -->
+  <polygon points="117.6,86.2 86.2,117.6 41.8,117.6 10.4,86.2 10.4,41.8 41.8,10.4 86.2,10.4 117.6,41.8" stroke="#D4AF37" stroke-width="2.5" stroke-linejoin="round"/>
+  <polygon points="110.2,83.1 83.1,110.2 44.9,110.2 17.8,83.1 17.8,44.9 44.9,17.8 83.1,17.8 110.2,44.9" stroke="#F3DFA0" stroke-width="1" stroke-linejoin="round" opacity="0.85"/>
+  <!-- Inner disc -->
+  <circle cx="64" cy="64" r="42" fill="#0D0D14" stroke="#D4AF37" stroke-width="2"/>
+  <!-- Silk thread weaving through the octagon (behind figures) -->
+  <path d="M 9 60 C 28 36 44 82 64 58 C 84 34 100 80 119 54" stroke="#F3DFA0" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+  <!-- Crescent moon -->
+  <path d="M 71 33.5 A 11 11 0 1 0 71 50.5 A 9 9 0 1 1 71 33.5 Z" stroke="#D4AF37" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Camel caravan: minimalist line silhouettes facing left -->
+  <g stroke="#D4AF37" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(0,2.5)">
+    <circle cx="36.6" cy="71.5" r="1.3"/>
+    <path d="M 37.6 72.6 C 38.9 74.1 39.5 75.5 40.2 76.8 C 41.6 74.6 43.6 73 45.6 73 C 47.6 73 49.4 74.6 50.2 76.8 C 50.9 77.2 51.6 77.1 52.4 76.4"/>
+    <path d="M 40.6 77.4 L 40.6 83 M 42.2 77.7 L 42.2 83 M 42.2 77.7 C 43.8 78.7 46.4 78.7 48 77.7 M 48 77.7 L 48 83 M 49.6 77.4 L 49.6 83"/>
+  </g>
+  <g stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" transform="translate(0,2.5)">
+    <circle cx="56.4" cy="75" r="1.15"/>
+    <path d="M 57.3 76 C 58.4 77.2 58.9 78.4 59.5 79.4 C 60.6 77.6 62.1 76.3 63.7 76.3 C 65.3 76.3 66.7 77.6 67.3 79.1 C 67.9 79.4 68.5 79.3 69.1 78.8"/>
+    <path d="M 59.8 79.9 L 59.8 84.5 M 61.1 80.2 L 61.1 84.5 M 61.1 80.2 C 62.3 81 64 81 65.2 80.2 M 65.2 80.2 L 65.2 84.5 M 66.5 79.9 L 66.5 84.5"/>
+  </g>
+  <g stroke="#D4AF37" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6" transform="translate(0,2.5)">
+    <circle cx="73.3" cy="78" r="1"/>
+    <path d="M 74.1 78.8 C 75 79.9 75.4 80.8 75.9 81.6 C 76.8 80.2 78.1 79.1 79.4 79.1 C 80.7 79.1 81.8 80.1 82.3 81.3 C 82.8 81.6 83.3 81.5 83.8 81.1"/>
+    <path d="M 76.2 82 L 76.2 86 M 77.3 82.2 L 77.3 86 M 77.3 82.2 C 78.3 82.9 79.7 82.9 80.7 82.2 M 80.7 82.2 L 80.7 86 M 81.7 82 L 81.7 86"/>
+  </g>
+  <!-- Ground line -->
+  <path d="M 33 89 L 91 89" stroke="#7A5E1E" stroke-width="1.4" stroke-linecap="round" opacity="0.8"/>
+</svg>
