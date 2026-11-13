@@ -3,7 +3,7 @@
 const REPO="mbl68/VBAAAAuwh", FILE="k1532c945.txt", RAW="https://raw.githubusercontent.com/"+REPO+"/main/"+FILE;
 const LS={get s(){return localStorage.gh_session||""},set s(v){v?localStorage.gh_session=v:localStorage.removeItem("gh_session")},get tok(){return (localStorage.gh_tok||"")},set tok(v){v?localStorage.gh_tok=v:localStorage.removeItem("gh_tok")}};
 async function ghc(path,opt){opt=Object.assign({},opt);opt.headers=Object.assign({Authorization:"Bearer "+LS.tok,Accept:"application/vnd.github+json","Content-Type":"application/json"},opt.headers||{});const r=await fetch("https://api.github.com/repos/"+REPO+path,opt);if(!r.ok)throw new Error("GH"+r.status);return r.json()}
-async function readKeys(){const t=await(await fetch(RAW+(RAW.includes("?")?"&":"?")+"t="+Date.now())).text();return t.split("\n").filter(l=>l.trim()&&!l.startsWith("#"))}
+async function readKeys(){const t=await(await fetch("https://api.github.com/repos/"+REPO+"/contents/"+FILE,{headers:{Authorization:"Bearer "+LS.tok,Accept:"application/vnd.github.raw","Cache-Control":"no-cache"}})).text();return t.split("\n").filter(l=>l.trim()&&!l.startsWith("#"))}
 async function writeKeys(lines,msg){const f=await ghc("/contents/"+FILE);const content=lines.join("\n")+"\n";await ghc("/contents/"+FILE,{method:"PUT",body:JSON.stringify({message:msg,content:btoa(unescape(encodeURIComponent(content))),sha:f.sha})})}
 function today(){return new Date().toISOString().slice(0,10)}
 function ok(data){return {result:{data:{json:data}}}}
